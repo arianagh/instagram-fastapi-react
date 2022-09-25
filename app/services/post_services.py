@@ -14,7 +14,7 @@ class PostServices(
     BaseServices
     [
         models.Post,
-        schemas.PostBase,
+        schemas.PostCreate,
     ]
 ):
 
