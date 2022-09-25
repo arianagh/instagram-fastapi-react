@@ -1,6 +1,7 @@
 import sqltap
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from starlette.staticfiles import StaticFiles
 
 from app.api.api import api_router
 from app.core.config import settings
@@ -22,6 +23,9 @@ async def add_sql_tap(request: Request, call_next):
     statistics = profiler.collect()
     sqltap.report(statistics, "report.txt", report_format="text")
     return response
+
+
+app.mount('/images', StaticFiles(directory='images'), name='images')
 
 
 app.add_middleware(

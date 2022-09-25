@@ -27,7 +27,7 @@ class BaseServices(Generic[ModelType, CreateSchemaType]):
     ) -> List[ModelType]:
         return db.query(self.model).offset(skip).limit(limit).all()
 
-    def get(self, db: Session, id: UUID4) -> Optional[ModelType]:
+    def get(self, db: Session, id: int) -> Optional[ModelType]:
         return db.query(self.model).filter(self.model.id == id).first()
 
     def create(self, db: Session, *, obj_in: CreateSchemaType) -> ModelType:
@@ -58,7 +58,7 @@ class BaseServices(Generic[ModelType, CreateSchemaType]):
         db.refresh(db_obj)
         return db_obj
 
-    def remove(self, db: Session, *, id: UUID4) -> ModelType:
+    def delete(self, db: Session, *, id: int) -> ModelType:
         obj = db.query(self.model).get(id)
         db.delete(obj)
         db.commit()
