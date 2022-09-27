@@ -40,7 +40,7 @@ def get_all_posts(
     return posts
 
 
-@router.delete("/delete")
+@router.delete("/delete/{id}")
 def delete_post(
         id: int,
         *,
